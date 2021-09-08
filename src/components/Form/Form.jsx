@@ -1,18 +1,18 @@
-import { Component } from "react";
-import shortid from "shortid";
+import { Component } from 'react';
+import shortid from 'shortid';
 
-import css from "../Form/Form.module.css";
+import css from '../Form/Form.module.css';
 
 class Form extends Component {
   state = {
-    name: "",
-    number: "",
+    name: '',
+    number: '',
   };
 
   nameInputId = shortid.generate();
   numberInputId = shortid.generate();
 
-  handleChange = (e) => {
+  handleChange = e => {
     const { name, value } = e.currentTarget;
 
     this.setState({
@@ -20,23 +20,16 @@ class Form extends Component {
     });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
-    const { name } = this.state;
-    const isRepeatName = this.props.contacts.find(
-      (contact) => contact.name.toLowerCase() === name.toLowerCase()
-    );
-
-    isRepeatName
-      ? alert(`${name} is already in contacts`)
-      : this.props.onSubmit(this.state);
+    this.props.onSubmit(this.state);
 
     this.reset();
   };
 
   reset = () => {
-    this.setState({ name: "", number: "" });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
